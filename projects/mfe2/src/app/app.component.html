@@ -1,0 +1,27 @@
+<div class="container">
+    <div *ngIf="pokemon; else notFound">
+        <div class="card">
+            <div class="card-header">
+                <h3>#{{pokemon.id}} {{pokemon.name | titlecase}}</h3>
+                <img src="https://projectpokemon.org/images/normal-sprite/{{pokemon.name}}.gif" alt="">
+                <div class="container">
+                    <span>{{pokemon.types[0].type.name}}</span>
+                    <span *ngIf="pokemon.types.length == 2">{{pokemon.types[1].type.name}}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h1>STATISTICHE</h1>
+                <div *ngFor="let stat of pokemon.stats" class='progress-bar'>
+                    <div class='progress-value' [style.width]="stat.base_stat/255*100 +'%'" ></div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+               
+            </div>
+        </div>
+    </div>
+    <ng-template #notFound>
+        <h1>Nessun Pokemon Selezionato</h1>
+    </ng-template>
+</div>

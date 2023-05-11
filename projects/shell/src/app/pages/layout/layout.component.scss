@@ -1,0 +1,132 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.modal{
+    transform: scale(0);
+    transition: all .3s ease-in-out;
+    width: 500px;
+    height: fit-content;
+    border:1px solid #f0f0f0;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+    .modal-header, .modal-body{
+        border-bottom: 1px solid #b4b4b4;
+    }
+
+    .modal-header{
+        position: relative;
+
+        button{
+            padding: .2em;
+            position: absolute;
+            right: .5em;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    
+        span{
+            font-size: 32px;
+        }
+    }
+
+    .modal-footer{
+        padding: 1em 0em;
+        background-color: #d0d0d0;
+    }
+}
+
+.show-modal{
+    transform: scale(1);
+}
+
+.setting-side-bar{
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(350px);
+    transition: all .4s ease-in-out;
+    width: 325px;
+    height: calc(100vh - 35px);
+    z-index: 100;
+    padding: 1em;
+    box-shadow: -5px 0px 5px -3px #616161;
+    overflow-y: scroll;
+    header{
+        justify-content: space-between;
+    }
+}
+.show-sidebar{
+    transform: translateX(0px);
+}
+
+.absolute-center{
+    top:calc(50% - 50px);
+    right: calc(50% - 250px);
+    z-index: 100;
+}
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.h-100{
+    height: calc(100% - 80px);
+}
+
+button {
+    margin-right: 1em;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 20px 20px 60px #d9d9d9,
+        -20px -20px 60px #ffffff;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+}
+
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    background-color: red;
+    box-shadow: 0 8px 4px 0 rgba(255, 0, 0, .2);
+
+    h1 {
+        font-weight: bold;
+        color: white;
+        margin-left: 1em;
+    }
+
+  
+}
+
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.abs-top-right{
+    right: .6em;
+    top:.4em;
+}
+
+select{
+    margin: 1em;
+    padding: .8em .2em;
+    border: none;
+    border-radius: 8px;
+}

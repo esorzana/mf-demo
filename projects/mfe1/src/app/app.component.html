@@ -1,0 +1,4 @@
+User:{{getUser()}}
+<div class="treeview">
+	<button *ngFor="let pokemon of pokemons" (click)="changeView(pokemon.url)" >{{pokemon.name}}</button>
+</div>

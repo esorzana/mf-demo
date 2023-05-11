@@ -1,0 +1,78 @@
+<nav class="flex-container">
+  <h1>Pokedex</h1>
+  <div>
+    {{getUser()}}
+    <select (change)="onSelect($event.target)"*ngIf="layouts">
+      <option selected disabled> Select a Layout</option>
+      <option  *ngFor="let layout of layouts, let i = index" [value]="layout.id"> Layout  #{{i+1}} - {{layout.id}}</option>
+    </select>
+    <button (click)="addItem()">Add Widget</button>
+    <button (click)="saveLayout()">Salva Layout</button>
+    <button (click)="actionSidebar('settings')">Impostazioni Layout</button>
+
+   
+  </div>
+</nav>
+
+
+<gridster *ngIf="!isLoading && pageLayout && layoutId; else loading" [options]="pageLayout.grid_options" #layout>
+  <gridster-item [item]="panel" *ngFor="let panel of pageLayout.panel; let i = index;" [id]="i">
+    <div class="container-flex relative">
+      <div class="absolute abs-top-right">
+
+        <button (click)="onRemoveItem($event, panel.id)">remove</button>
+        <span>{{i}}</span>
+      </div>
+    </div>
+
+    <mft-wc-wrapper *ngIf="panel.widget && panel.widget.type == 'mfe' else blankComponent"
+      [options]="getWidgetOptions(panel.widget)"></mft-wc-wrapper>
+    <ng-template #blankComponent>
+      <h2>blank component</h2>
+    </ng-template>
+  </gridster-item>
+</gridster>
+
+<ng-template #loading>
+  <div *ngIf="layoutId" class="flex-container center h-100">
+    <img src="../assets/loading.gif" alt="">
+  </div>
+  <div *ngIf="!layoutId" style="position: absolute; left: 45%; top:50%">SELEZIONA UN LAYOUT</div>
+</ng-template>
+
+<div class="absolute modal absolute-center" id="radio-modal">
+  <div class="modal-header"><span>Select Widget</span> <button (click)="actionModal('radio-modal')">x</button></div>
+  <div class="modal-body">
+    <div *ngIf="widgets">
+
+      <div *ngFor="let widget of widgets" style="margin: 1em">
+        <label for="radio-{{widget.name}}">
+          <input id="radio-{{widget.name}}" [value]='widget.id' type="radio" name="widgetID"
+            (change)="setWidget($event)" [(ngModel)]="selectedWidget">
+          {{widget.name}} {{widget.remoteEntry}}
+        </label>
+      </div>
+
+      <div style="margin: 1em">
+        <label for="radio-default">
+          <input id="radio-default" [value]='"default"' type="radio" name="widgetID" (change)="setWidget($event)"
+            [(ngModel)]="selectedWidget">
+          empty component
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="addPanel()"> Add Panel </button>
+  </div>
+</div>
+
+<div class="setting-side-bar" id="settings">
+  <header class="flex-container"><h4>Impostazioni</h4> <button (click)="actionSidebar('settings')">Chiudi</button></header>
+  <div *ngIf="pageLayout?.grid_options" style="display: flex; flex-direction: column;">
+      <span *ngFor="let option of getLayoutOptionKeys()">{{option}}: {{pageLayout.grid_options[option]}}</span>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
