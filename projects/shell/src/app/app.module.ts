@@ -8,11 +8,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {GridsterModule} from 'angular-gridster2';
 import { LayoutComponent } from './pages/layout/layout.component';
+import { ManfredTmpComponent } from './pages/manfred-tmp/manfred-tmp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent
+    LayoutComponent,
+    ManfredTmpComponent
   ],
   imports: [
     BrowserModule,

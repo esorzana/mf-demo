@@ -16,7 +16,7 @@ import { WidgetRepositoryService } from '../../services/repository/widget-reposi
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit{
+export class LayoutComponent implements OnInit {
   title = 'shell';
   pageLayout: Layout | any;
   @ViewChild('layout', { static: false }) pRef: GridsterComponent | undefined;
@@ -37,35 +37,35 @@ export class LayoutComponent implements OnInit{
   subscriptions: Subscription = new Subscription;
 
   //testing
-  ldLayouts:LoadDataWrapper<Layout[]> = new LoadDataWrapper([]);
+  ldLayouts: LoadDataWrapper<Layout[]> = new LoadDataWrapper([]);
 
 
-  static itemChange(item: GridsterItem, itemComponent: GridsterItemComponentInterface){
+  static itemChange(item: GridsterItem, itemComponent: GridsterItemComponentInterface) {
     console.info('itemChanged', item, itemComponent);
   }
 
 
-getUser(){
-  return this.coreService.user;
-}
- constructor (
+  getUser() {
+    return this.coreService.user;
+  }
+  constructor(
     private layoutRepo: LayoutRepositoryService,
     private widgetRepo: WidgetRepositoryService,
-    private coreService:CoreService) {
-    
-      this.coreService.login("emasorz", "");
+    private coreService: CoreService) {
+
+    this.coreService.login("emasorz", "");
     //testing
     //this.ldService.loadData(this.layoutRepo.getLayouts(), this.ldLayouts, () => console.log(this.ldLayouts))
   }
 
-  onSelect(target:any){
+  onSelect(target: any) {
     this.layoutId = target.value;
     this.loadLayout();
   }
 
   async ngOnInit(): Promise<void> {
-    await this.layoutRepo.getLayouts().subscribe((layouts:Layout[])=>{
-      if(layouts)
+    await this.layoutRepo.getLayouts().subscribe((layouts: Layout[]) => {
+      if (layouts)
         this.layouts = layouts
     })
 
@@ -78,7 +78,7 @@ getUser(){
   }
 
 
-  loadLayout(){
+  loadLayout() {
     this.isLoading = true;
     this.subscriptions.add(this.layoutRepo.getLayoutById(this.layoutId).subscribe(result => {
       this.pageLayout = result;
@@ -192,6 +192,7 @@ getUser(){
   }
 
   getWidgetOptions(widget: Widget) {
+    console.log({ remoteEntry: widget.remoteEntry, remoteName: widget.remoteName, exposedModule: widget.exposedModule, elementName: widget.elementName })
     return { remoteEntry: widget.remoteEntry, remoteName: widget.remoteName, exposedModule: widget.exposedModule, elementName: widget.elementName } as Widget;
   }
 
